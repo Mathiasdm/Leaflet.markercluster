@@ -44,6 +44,10 @@ L.DistanceGrid.prototype = {
 
 				if (len === 1) {
 					delete row[x];
+					//Avoid accumulating empty rows (memory leak)
+					if (Object.keys(row).length == 0) {
+						delete grid[y];
+					}
 				}
 
 				return true;
